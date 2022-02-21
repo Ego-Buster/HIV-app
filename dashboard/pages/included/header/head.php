@@ -14,17 +14,20 @@
   <meta property="og:title" content="Système de gestion du programme HIV du projet KIDSS" />
   <meta property="og:image" content="<?php echo _ROOT_PATH; ?>img/logo.png" />
 
+  <!-- AFFICHAGE ICONES DU SITE -->
   <link rel="icon" sizes="144x144" href="<?php echo _ROOT_PATH; ?>img/icon.png" type="image/x-icon"/>
   <link rel="shortcut icon" href="<?php echo _ROOT_PATH; ?>img/logo.png" type="image/x-icon"/>
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato'>
+  <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>icons/style.css">
+  
   <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>tools/frameworks/bootstrap/bootstrap.css">
-  <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>tools/frameworks/black/Black.css">
-  <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>dashboard/style/variables.css">
-  <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>dashboard/style/global.css">
+  <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>tools/frameworks/black/black.css">
+  <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>dashboard/css/variables.css">
+  <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>dashboard/css/global.css">
   <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>dashboard/pages/included/header/header.css">
   <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>dashboard/pages/included/footer/footer.css">
+  <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>dashboard/css/responsive.css">
 
-  <script href="<?php echo _ROOT_PATH; ?>tools/frameworks/jquery/jquery.js"></script>
-  <script type="text/javascript" src="<?php echo _ROOT_PATH; ?>dashboard/pages/included/header/header.js" defer></script>
+  <script src="<?php echo _ROOT_PATH; ?>tools/frameworks/jquery/jquery.js"></script>
+  <script src="<?php echo _ROOT_PATH; ?>tools/frameworks/black/black.js"></script>
+  <script src="<?php echo _ROOT_PATH; ?>dashboard/pages/included/header/header.js"></script>
+  

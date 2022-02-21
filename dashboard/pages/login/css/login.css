@@ -1,0 +1,63 @@
+.btn-login{
+  display: none;
+}
+
+.content-login-form{
+  width: 40%;
+  height: auto;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 1%;
+  padding-right: 1%;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+.line-form{
+  width: 100%;
+  margin-top: 30px;
+  font-size: 20px;
+  
+}
+
+.text-login{
+  text-align: center;
+  font-size: 25px;
+  width: 100%;
+  margin-top: 15px;
+  padding-top: 10px;
+}
+
+.content-input-form{
+  width: 100%;
+}
+
+.input-form{
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-bottom: solid 1px black ;
+}
+
+.content-btn-to-login{
+  text-align: right;
+}
+
+.btn-to-login{
+  background-color: var(--color-primary);
+  color: var(--btn-primary-text-color);
+  border-radius: 5px;
+  height: 45px;
+  width: 140px;
+}
+
+.content-forgot-password{
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+.response-login{
+  font-style: italic;
+  text-align: center;
+  display: none;
+}

@@ -1,5 +1,5 @@
 <?php
 
-$db=new pdo('mysql:host=localhost;dbname=db_name','root','');
+$db=new pdo('mysql:host=localhost;dbname=meal_db','root','');
 
 ?>

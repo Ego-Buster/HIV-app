@@ -1,0 +1,41 @@
+/* Mobile */
+@media (max-width: 575px) {
+  .content-login-form{
+      width: 98%;
+      margin-left: 1%;
+      margin-right: 1%;
+    }
+
+}
+
+
+/* Tablette only */
+@media (min-width: 576px) and (max-width: 991px) {
+  
+
+}
+
+
+/* Tablette */
+@media (max-width: 991px) {
+    .content-login-form{
+      width: 70%;
+      margin-left: 15%;
+      margin-right: 15%;
+    }
+
+}
+
+
+/* Laptop */
+@media (min-width: 992px) {
+  
+  
+}
+
+
+/* TV */
+@media (min-width: 1441px) {
+
+
+}

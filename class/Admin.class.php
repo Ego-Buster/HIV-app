@@ -9,6 +9,7 @@ class Admin
     private $_email;
     private $_password;
     private $_role;
+    private $_position;
     private $_name;
     private $_last_seen;
     private $_added_at;
@@ -65,6 +66,15 @@ class Admin
     }
 
 
+    public function setPosition($position){
+        $this->_position=htmlentities(strval($position));
+    }
+
+    public function getPosition(){
+        return $this->_position;
+    }
+
+
     public function setName($name){
         $this->_name=strval($name);
     }
@@ -107,12 +117,13 @@ class Admin
 
     public function addAdmin(Admin $admin){
         include(_APP_PATH."bd/server-connect.php");
-        $query=$db->prepare("INSERT INTO admins VALUES (?,?,UNHEX(SHA1(?)),?,?,?,?)");
+        $query=$db->prepare("INSERT INTO admins VALUES (?,?,UNHEX(SHA1(?)),?,?,?,?,?)");
 
         $id=0;
         $email=$admin->getEmail();
         $password=$admin->getPassword();
         $role=$admin->getRole();
+        $position=$admin->getPosition();
         $name=$admin->getName();
         $last_seen=$admin->getLast_seen();
         $added_at=$admin->getAdded_at();
@@ -121,15 +132,16 @@ class Admin
         $query->bindParam(2,$email);
         $query->bindParam(3,$password);
         $query->bindParam(4,$role);
-        $query->bindParam(5,$name);
-        $query->bindParam(6,$last_seen);
-        $query->bindParam(7,$added_at);
+        $query->bindParam(5,$position);
+        $query->bindParam(6,$name);
+        $query->bindParam(7,$last_seen);
+        $query->bindParam(8,$added_at);
 
 
         if($query->execute()){
           return true;
       }else{
-          return false;
+          return $admin->getPosition();
       }
   }
 
@@ -222,6 +234,7 @@ public function editAdmin(Admin $admin) {
     $query=$db->prepare("UPDATE admins
         SET email=?,
         role=?,
+        position=?,
         name=?,
         last_seen=?
         WHERE id=?
@@ -231,14 +244,16 @@ public function editAdmin(Admin $admin) {
     $id=$admin->getId();
     $email=$admin->getEmail();
     $role=$admin->getRole();
+    $position=$admin->getPosition();
     $name=$admin->getName();
     $last_seen=$admin->getLast_seen();
 
     $query->bindParam(1,$email);
     $query->bindParam(2,$role);
-    $query->bindParam(3,$name);
-    $query->bindParam(4,$last_seen);
-    $query->bindParam(5,$id);
+    $query->bindParam(3,$position);
+    $query->bindParam(4,$name);
+    $query->bindParam(5,$last_seen);
+    $query->bindParam(6,$id);
 
     if($query->execute()){
 
@@ -304,8 +319,6 @@ public function editPassword(Admin $admin) {
 
 public function logIn(Admin $admin) {
     include(_APP_PATH."bd/server-connect.php");
-
-    $blocked=0;
 
     /* Recherche de l'administrateur */
     $query=$db->prepare("SELECT * FROM admins WHERE email=? AND password=UNHEX(SHA1(?))");

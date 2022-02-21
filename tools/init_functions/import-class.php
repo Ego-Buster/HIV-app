@@ -109,6 +109,7 @@ $current_admin=[
 	'email'=>"",
 	'password'=>"",
 	'role'=>"",
+	'position'=>"",
 	'name'=>"",
 	'last_seen'=>"",
 	'added_at'=>""

@@ -1,0 +1,48 @@
+/* Mobile */
+@media (max-width: 575px) {
+  
+
+}
+
+
+/* Tablette only */
+@media (min-width: 576px) and (max-width: 991px) {
+  
+
+}
+
+
+/* Tablette */
+@media (max-width: 991px) {
+    .content-menu{
+      display: none;
+    }
+
+    .content-tab{
+      width: 94vw;
+      padding-left: 0.5vw;
+    }
+
+    .btn-burger{
+      display: initial;
+    }
+
+    header{
+      box-shadow: 3px 3px 10px black;
+    }
+
+}
+
+
+/* Laptop */
+@media (min-width: 992px) {
+  
+  
+}
+
+
+/* TV */
+@media (min-width: 1441px) {
+
+
+}

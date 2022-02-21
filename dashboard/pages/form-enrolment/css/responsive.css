@@ -1,0 +1,33 @@
+/* Mobile */
+@media (max-width: 575px) {
+
+
+}
+
+
+/* Tablette only */
+@media (min-width: 576px) and (max-width: 991px) {
+  
+
+}
+
+
+/* Tablette */
+@media (max-width: 991px) {
+  
+
+}
+
+
+/* Laptop */
+@media (min-width: 992px) {
+  
+  
+}
+
+
+/* TV */
+@media (min-width: 1441px) {
+
+
+}

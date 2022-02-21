@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 require_once 'init.php';
 require_once _APP_PATH.'tools/init_functions/functions.php';
 require_once _APP_PATH.'tools/init_functions/import-class.php';
@@ -18,6 +21,7 @@ function redirection($title, $pageContain, $currentPage, $currentSubPage, $css, 
   <title><?php echo $title; ?></title>
 
   <link rel="stylesheet" href="<?php echo $css; ?>"/>
+  <link rel="stylesheet" href="css/responsive.css"/>
 
 </head>
 <body>

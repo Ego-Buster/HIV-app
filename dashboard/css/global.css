@@ -1,0 +1,258 @@
+/*Menu vertical gauche*/
+.content-tab{
+  width: 90vw;
+  height: 80vh;
+  padding-left: 6vw;
+  padding-right: 0.5vw;
+  padding-top: 10px;
+}
+
+.content-head{
+  width: 100%;
+  height: auto;
+  padding-bottom: 20px;
+}
+
+/*Indicateur de la page courante*/
+.content-path-navigation{
+  font-style: italic;
+  color: gray;
+}
+
+
+/*Lien indiquant la page courrante*/
+.link-navigation{
+  text-decoration: none;
+  color: gray;
+  font-weight: bold;
+}
+
+
+/*Boutton d'ajout d'un nouvel élément*/
+.btn-add{
+  margin-right: 50px;
+  float: right;
+  background-color: var(--nav-bg-color);
+  color: white;
+  width: 50px;
+  height: 50px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.btn-add:hover{
+  box-shadow: 2px 2px 5px;
+  color: black;
+}
+
+
+/*Champ de recherche*/
+.searching-line{
+  width: 100%;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.searching-input{
+  margin-left: 10px;
+  width: 50%;
+  height: 50px;
+  border: none;
+  border-bottom: solid 1px gray;
+}
+
+.searching-line i{
+  font-size: 25px;
+  font-weight: bold;
+  color: var(--nav-bg-color);
+}
+
+
+.legend{
+  width: 100%;
+  background-color: var(--nav-bg-color);
+  color: #fff;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+
+/*Contenant des formulaire, et titre de la page*/
+.content-form{
+  width: 100%;
+  height: auto;
+  padding-top: 30px;
+}
+
+.column-form{
+  height: auto;
+  margin-top: 15px;
+  padding-bottom: 15px;
+}
+
+.content-input-form{
+  width: 96%;
+  height: 100%;
+  margin-left: 2%;
+}
+
+.content-input-form .title-form,.content-input-form input[type="text"], .content-input-form input[type="date"], .content-input-form select{
+  width: 96%;
+}
+
+.content-input-form input[type="text"],.content-input-form input[type="date"], .content-input-form select{
+  text-align: center;
+  height: 30px;
+}
+
+/*Preambule de la page*/
+.line-title{
+  width: 100%;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+/*Contenu des onglet*/
+.content-menu{
+  width: 4vw;
+  background-color : var(--nav-bg-color);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  position: fixed;
+  z-index: 10;
+}
+
+/*Texte des menus*/
+.item-menu .txt-menu{
+  display: none;
+}
+
+.mobile-item-menu .txt-menu{
+  display: initial;
+}
+
+.icon-menu{
+  font-size: 25px;
+}
+
+.icon-menu::after{
+  content: " ";
+}
+
+.mobile-content-menu{
+  width: 100%;
+  margin-top: 80px;
+  display: none;
+  background-color : var(--nav-bg-color);
+}
+
+.content-menu,.content-tab{
+  margin-top: 80px;
+}
+
+.item-menu{
+  width: 100%;
+  height: auto;
+  padding-bottom: 25px;
+  padding-top: 25px;
+  color: white;
+  text-align: center;
+  box-shadow: 1px 1px 1px black;
+  cursor: pointer;
+}
+
+/* MENU ACTUEL DE L'UTILISATEUR */
+.menu-focused{
+  background-color: white;
+  color: black;
+}
+
+
+
+
+.menu-home{
+  border-top-right-radius: 10px;
+}
+
+.menu-users{
+  border-bottom-right-radius: initial;
+}
+
+
+.item-menu:hover{
+  opacity: 0.4;
+}
+
+
+.btn-log{
+  position: absolute;
+  right: 10px;
+  color: white;
+  margin-top: 2vh;
+}
+
+
+.btn-log:hover{
+  opacity: 0.7;
+}
+
+.btn-login{
+  background-color: green;
+}
+
+.btn-logout{
+  background-color: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Google Translate */
+.btn-choose-lang{
+  position: absolute;
+  right: 110px;
+  color: white;
+  top: 2.5vh;
+  border-radius: 30px;
+} 
+
+.translated-ltr{margin-top:-40px;}
+.translated-ltr{margin-top:-40px;}
+.goog-te-banner-frame {display: none;margin-top:-20px;}
+
+.goog-logo-link{
+ display:none !important;
+}
+.goog-te-banner{
+  visibility: hidden !important;
+  display: none !important;
+}
+.goog-te-gadget {
+ color: transparent !important;
+}
+
+.goog-te-gadget .goog-te-combo {
+  height: 30px;
+  border: none;
+  background-color: white;
+}
+/* *** 

@@ -19,12 +19,16 @@
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato'>
+  
+  <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>icons/style.css">
   <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>tools/frameworks/bootstrap/bootstrap.css">
   <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>tools/frameworks/black/black.css">
-  <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>dashboard/style/variables.css">
-  <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>dashboard/style/global.css">
-  <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>dashboard/pages/included/header/header.css">
-  <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>dashboard/pages/included/footer/footer.css">
+  <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>css/variables.css">
+  <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>css/global.css">
+  <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>css/responsive.css">
+  <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>pages/included/header/header.css">
+  <link rel="stylesheet" href="<?php echo _ROOT_PATH; ?>pages/included/footer/footer.css">
 
   <script href="<?php echo _ROOT_PATH; ?>tools/frameworks/jquery/jquery.js"></script>
-  <script type="text/javascript" src="<?php echo _ROOT_PATH; ?>dashboard/pages/included/header/header.js" defer></script>
+  <script href="<?php echo _ROOT_PATH; ?>tools/frameworks/black/black.js"></script>
+  <script type="text/javascript" src="<?php echo _ROOT_PATH; ?>pages/included/header/header.js" defer></script>
