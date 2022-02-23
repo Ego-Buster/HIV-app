@@ -5,9 +5,8 @@
 	
 
 .responsive-table .row-item:hover,.responsive-table tbody .row-item:nth-child(even):hover{
-	opacity: 0.7;
+	opacity: 0.5;
 	background-color: transparent;
-	font-weight: bold;
-	box-shadow: 1px 1px 2px black;
+	box-shadow: 1px 1px 2px blue;
 	border-bottom: solid 1px rgb(240,240,240);
 }

@@ -202,7 +202,7 @@ footer,.footer{
 
 .responsive-table thead{
 	border-bottom: solid 1px rgb(200,200,200);
-	background-color: var(--nav-bg-color);;
+	background-color: var(--nav-bg-color);
 	color: white;
 	height: 50px;
 	font-weight: bolder;

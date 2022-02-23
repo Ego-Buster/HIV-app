@@ -3,8 +3,6 @@
 session_start();
 
 require_once 'init.php';
-require_once _APP_PATH.'tools/init_functions/functions.php';
-require_once _APP_PATH.'tools/init_functions/import-class.php';
 
 function redirection($title, $pageContain, $currentPage, $currentSubPage, $css, $js){
     //$title : titre de la page
@@ -26,6 +24,8 @@ function redirection($title, $pageContain, $currentPage, $currentSubPage, $css, 
 </head>
 <body>
   <?php include(_APP_PATH."dashboard/pages/included/header/header.php"); // En tête ?>
+  <?php include(_APP_PATH.'tools/init_functions/functions.php'); // Importation des fonctions globales ?>
+  <?php include(_APP_PATH.'tools/init_functions/import-class.php'); // Importation des squelletes d'instanciation ?>
   <?php include($pageContain); // Contenu ?>
 </div>
 

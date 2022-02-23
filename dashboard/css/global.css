@@ -28,6 +28,42 @@
 }
 
 
+.required-field label::after{
+  color: red;
+  content: " *";
+}
+
+
+/*Zone d'attente de resultat*/
+.waiting-zone{
+  width: 100%;
+  height: 40px;
+  font-weight: bold;
+  text-align: center;
+  font-style: italic;
+  color: orange;
+}
+
+
+/*Contenant des resultat trouvées*/
+.content-result-line{
+  width: 100%;
+  height: auto;
+}
+
+/*Ligne des resultats vides*/
+.line-not-found{
+  width: 100%;
+  height: 40px;
+  padding-top: 20px;
+  margin-top: 20px;
+  background-color: #ffded7;
+  text-align: center;
+  color: red;
+  font-weight: bold;
+  font-style: italic;
+}
+
 /*Boutton d'ajout d'un nouvel élément*/
 .btn-add{
   margin-right: 50px;
@@ -43,6 +79,21 @@
 .btn-add:hover{
   box-shadow: 2px 2px 5px;
   color: black;
+}
+
+
+/*Boutton de sauvegarde*/
+.btn-save{
+  background-color: var(--nav-bg-color);
+  color: white;
+  height: 50px;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.btn-save:hover{
+  box-shadow: 2px 2px 5px;
+  opacity: 0.8;
 }
 
 
@@ -89,6 +140,18 @@
   padding-bottom: 15px;
 }
 
+.column-kid-infos{
+  height: 60px;
+}
+
+.column-case-infos{
+  height: 150px;
+}
+
+.column-art-code{
+  height: 65px;
+}
+
 .content-input-form{
   width: 96%;
   height: 100%;
@@ -102,6 +165,10 @@
 .content-input-form input[type="text"],.content-input-form input[type="date"], .content-input-form select{
   text-align: center;
   height: 30px;
+}
+
+.content-input-form select{
+  height: 35px;
 }
 
 /*Preambule de la page*/
@@ -122,6 +189,13 @@
   position: fixed;
   z-index: 10;
 }
+
+
+/*Champs obligatoires*/
+.required-field{
+  content: " *";
+}
+
 
 /*Texte des menus*/
 .item-menu .txt-menu{

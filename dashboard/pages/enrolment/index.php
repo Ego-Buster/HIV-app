@@ -7,7 +7,7 @@
 	
 
 	}else{
-		redirection("HIV-project: enrolment", _APP_PATH."dashboard/pages/enrolment/enrolment.php", "enrolment", "", _ROOT_PATH."dashboard/pages/enrolment/css/enrolment.css", _ROOT_PATH."dashboard/pages/enrolment/js/enrolment.js");
+		redirection("HIV-project: enrolments", _APP_PATH."dashboard/pages/enrolment/enrolment.php", "enrolment", "", _ROOT_PATH."dashboard/pages/enrolment/css/enrolment.css", _ROOT_PATH."dashboard/pages/enrolment/js/enrolment.js");
 	}
 	
 

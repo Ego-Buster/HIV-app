@@ -1,18 +1,51 @@
 <?php
 
-$tab_month=array("Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aougt","Septembre","Octobre","Novembre","Décembre");
+$tab_month=array("January","Febuary","March","April","May","June","July","August","September","October","November","December");
 
-function get_french_month($month){
+function get_month($month){
 	global $tab_month;
+	$tab_month=array("January","Febuary","March","April","May","June","July","August","September","October","November","December");
 	return $tab_month[$month-1];
 }
 
-function get_french_date($date){
+function get_date($date){
 	global $tab_month;
 	$date_convert_in_seconde = strtotime($date);
+	$day=date('d', $date_convert_in_seconde);
+
+	/*Retrait du "0" des jour allant de 1 à 9*/
+	if(date('d', $date_convert_in_seconde)>0 && date('d', $date_convert_in_seconde)<10){
+		$day=substr($day, 1);
+	}
+
+
+	/*Application des normalisation*/
+	if(date('d', $date_convert_in_seconde)==1){
+		$day="1<sup>st</sup>";
+	
+	}else if(date('d', $date_convert_in_seconde)==2){
+		$day="2<sup>nd</sup>";
+	
+	}else if(date('d', $date_convert_in_seconde)==3){
+		$day="3<sup>rd</sup>";
+	
+	}else{
+		$day.="<sup>th</sup>";
+	
+	}
+
 	$month=date('m',$date_convert_in_seconde);
-	$month=get_french_month($month);
-	return (date('d', $date_convert_in_seconde)."  ".$month." ".date('Y', $date_convert_in_seconde));
+	$month=get_month($month);
+	return ($day."  ".$month." ".date('Y', $date_convert_in_seconde));
+}
+
+
+function if_empty($string){
+	if(empty($string)){
+		$string="...";
+	}
+
+	return $string;
 }
 
 
