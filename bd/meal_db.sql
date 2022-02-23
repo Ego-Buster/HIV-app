@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 21 fév. 2022 à 13:48
--- Version du serveur :  5.7.24
--- Version de PHP :  7.2.14
+-- Généré le :  mer. 23 fév. 2022 à 03:48
+-- Version du serveur :  5.7.26
+-- Version de PHP :  7.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -89,14 +89,23 @@ CREATE TABLE IF NOT EXISTS `enrolments` (
   `point_of_entry` varchar(100) NOT NULL,
   `champ_code` varchar(20) NOT NULL,
   `type_enrolment` varchar(20) NOT NULL,
+  `date_enrolment` date NOT NULL,
   `case_worker` varchar(200) NOT NULL,
+  `beneficiary_type` varchar(30) NOT NULL,
   `added_by` bigint(20) NOT NULL,
   `added_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `national_id` (`national_id`),
   UNIQUE KEY `art_code` (`art_code`),
   KEY `added_by` (`added_by`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `enrolments`
+--
+
+INSERT INTO `enrolments` (`id`, `first_name`, `family_name`, `national_id`, `mobile`, `sex`, `date_of_birth`, `hiv_status`, `reason_unknown_hiv_status`, `art_status`, `art_code`, `date_initiation_art`, `treatment_health_facility_linked`, `art_regimen`, `school_level`, `class`, `relationship_caregiver_child`, `cause_of_dead_mother`, `cause_of_dead_father`, `population_type`, `index_case`, `disability`, `has_birth_certificate`, `pregnant_woman`, `health_district_residence`, `health_area`, `quarter`, `village`, `locality_description`, `point_of_entry`, `champ_code`, `type_enrolment`, `date_enrolment`, `case_worker`, `beneficiary_type`, `added_by`, `added_at`) VALUES
+(1, 'asdasd', '', 'asdasd', '', 'Male', '2000-02-02', 'Negative', 'Refused Testing', 'On Treatment', 'asdasd', '2000-02-02', '', 'asdasdasd', 'Pre-Primary', '1', 'Mother', '', '', 'HIV exposed infant', 0, 0, 0, 0, 'GAROUA 1', '', '', '', '', '', '', 'In person', '2022-02-23', 'asdasdasd', 'Child', 1, '2022-02-23 02:39:17');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

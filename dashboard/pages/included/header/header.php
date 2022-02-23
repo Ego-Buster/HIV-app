@@ -27,7 +27,7 @@
     <div class="item-menu mobile-item-menu menu-home"><i class="DGfi-home icon-menu"></i><span class="txt-menu"> Home</span></div>
   </a>
   <a href="../enrolment">
-    <div class="item-menu mobile-item-menu menu-enrolment"><i class="DGfi-profile icon-menu"></i><span class="txt-menu no_translate"> Enrolment</span></div>
+    <div class="item-menu mobile-item-menu menu-enrolment"><i class="DGfi-profile icon-menu"></i><span class="txt-menu no_translate"> Enrollment</span></div>
   </a>
 
   <a href="../ovc">
@@ -44,7 +44,7 @@
     <div class="item-menu menu-home"><i class="DGfi-home icon-menu"></i><span class="txt-menu"> Home</span></div>
   </a>
   <a href="../enrolment">
-    <div class="item-menu menu-enrolment"><i class="DGfi-profile icon-menu"></i><span class="txt-menu no_translate"> Enrolment</span></div>
+    <div class="item-menu menu-enrolment"><i class="DGfi-profile icon-menu"></i><span class="txt-menu no_translate"> Enrollment</span></div>
   </a>
 
   <a href="../ovc">

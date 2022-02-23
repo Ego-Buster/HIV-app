@@ -117,11 +117,11 @@ class Admin
 
     public function addAdmin(Admin $admin){
         include(_APP_PATH."bd/server-connect.php");
-        $query=$db->prepare("INSERT INTO admins VALUES (?,?,UNHEX(SHA1(?)),?,?,?,?,?)");
+        $query=$db->prepare("INSERT INTO admins VALUES (?,?,?,?,?,?,?,?)");
 
         $id=0;
         $email=$admin->getEmail();
-        $password=$admin->getPassword();
+        $password=password_hash($admin->getPassword(), PASSWORD_DEFAULT);
         $role=$admin->getRole();
         $position=$admin->getPosition();
         $name=$admin->getName();
@@ -205,10 +205,7 @@ public function getAdmin($id){
 
 public function getAdmins() {
     include(_APP_PATH."bd/server-connect.php");
-    $session = new Session();
-    $role= strval($session->getRole_3());
-    $query=$db->prepare("SELECT * FROM admins WHERE role != ? ORDER BY name ASC");
-    $query->bindParam(1,$role);
+    $query=$db->prepare("SELECT * FROM admins ORDER BY name ASC");
 
     $admins=[];
 
@@ -293,13 +290,13 @@ public function editPassword(Admin $admin) {
     include(_APP_PATH."bd/server-connect.php");
 
     $query=$db->prepare("UPDATE admins
-        SET password=UNHEX(SHA1(?))
+        SET password=?
         WHERE id=?
 
         ");
 
     $id=$admin->getId();
-    $password=$admin->getPassword();
+    $password=password_hash($admin->getPassword(), PASSWORD_DEFAULT);
 
     $query->bindParam(1,$password);
     $query->bindParam(2,$id);
@@ -321,34 +318,39 @@ public function logIn(Admin $admin) {
     include(_APP_PATH."bd/server-connect.php");
 
     /* Recherche de l'administrateur */
-    $query=$db->prepare("SELECT * FROM admins WHERE email=? AND password=UNHEX(SHA1(?))");
+    $query=$db->prepare("SELECT * FROM admins WHERE email=?");
 
     $email=$admin->getEmail();
     $password=$admin->getPassword();
 
     $query->bindParam(1,$email);
-    $query->bindParam(2,$password);
 
     if($query->execute()){
-        /* Si son compte a été trouvé */
+        /* Si son email a été trouvé */
         if($query->rowCount()==1){
 
             $data=$query->fetch();
-
             $admin_found=new Admin($data);
-            $_SESSION['type']="admin";
-            $_SESSION['id']=$admin_found->getId();
-            $_SESSION['email']=$admin_found->getEmail();
-            $_SESSION['role']=$admin_found->getRole();
-            $_SESSION['name']=$admin_found->getName();
-            $_SESSION['added_at']=$admin_found->getAdded_at();
 
-            return true;
+            if(password_verify($password, $admin_found->getPassword())){
+                $_SESSION['type']="admin";
+                $_SESSION['id']=$admin_found->getId();
+                $_SESSION['email']=$admin_found->getEmail();
+                $_SESSION['role']=$admin_found->getRole();
+                $_SESSION['name']=$admin_found->getName();
+                $_SESSION['added_at']=$admin_found->getAdded_at();
+
+                return true;
+
+            }else{
+                return false;
+            }
 
         }else{
             /* Si son compte n'a pas été trouvé */
-            return "not found";
+            return false;
         }
+
     }else{
         return false;
     }

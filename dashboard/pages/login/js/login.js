@@ -24,33 +24,33 @@ $(function(){
 			if(email==""){
 				verified=false;
 				response="<span class='orange'>Please, fill in the email</span>";
-			
+				
 			}else if(password==""){
 				verified=false;
 				response="<span class='orange'>Please, fill in the password</span>";		
-			
+				
 			}
 
 
 			if(verified==true){
 
 				$.ajax({
-		            type: "POST",
-		            url: "treatment/login.php",
-		            data: {
-		                "email":email,
-		                "password":password
-		            },
+					type: "POST",
+					url: "treatment/login.php",
+					data: {
+						"email":email,
+						"password":password
+					},
 
 		            //if received a response from the server
 		            success: function(data, textStatus, jqXHR) {
 		            	if(data==true){
 		            		window.location.href="../home";
-		            	
+		            		
 		            	}else{
 		            		$('.response-login').html("");
-							response="<span class='red'>Email ou mot de passe incorrect !</span>";
-			            	$('.response-login').html(response).slideDown(100);
+		            		response="<span class='red'>Incorrect email or password !</span>";
+		            		$('.response-login').html(response).slideDown(100);
 		            	}
 		            },
 
@@ -62,7 +62,7 @@ $(function(){
 		            //capture the request before it was sent to server
 		            beforeSend: function(jqXHR, settings){
 		            	$('.response-login').html("");
-						response="<span class='orange'>Testing...</span>";
+		            	response="<span class='orange'>Testing...</span>";
 		            	$('.response-login').html(response).slideDown(1);
 		            },
 
@@ -73,10 +73,10 @@ $(function(){
 		            }
 
 		        }); 
-			
+				
 			}else{
-		        $('.response-login').html("");
-		        $('.response-login').html(response).slideDown();
+				$('.response-login').html("");
+				$('.response-login').html(response).slideDown();
 			}
 
 

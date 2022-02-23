@@ -31,7 +31,7 @@ $(function(){
 	function view_enrolment(){
 		$('.enrolment').dblclick(function(){
 			let id=$(this).data('id');
-			window.location.href="../form-enrolment?id="+id;
+			window.location.href="../form-enrolment/"+id;
 		});
 	}
 
@@ -51,7 +51,7 @@ $(function(){
 			type: "POST",
 			url: "treatment/search-enrolment.php",
 			data: {
-			"word":word
+				"word":word
 			},
 
 			//if received a response from the server
@@ -67,7 +67,7 @@ $(function(){
 
 			//capture the request before it was sent to server
 			beforeSend: function(jqXHR, settings){
-			/*Vider / Reinitialiser le formulaire*/
+				/*Vider / Reinitialiser le formulaire*/
 				$('.waiting-zone').text("Searching...");
 			},
 
