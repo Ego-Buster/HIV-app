@@ -73,6 +73,8 @@ $current_enrolment=[
     'date_enrolment'=>"",
     'case_worker'=>"",
     'beneficiary_type'=>"",
+    'deleted'=>0,
+    'deleted'=>0,
     'added_by'=>0,
     'added_at'=>""
 ];

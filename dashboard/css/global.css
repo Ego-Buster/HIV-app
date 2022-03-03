@@ -13,6 +13,28 @@
   padding-bottom: 20px;
 }
 
+/**/
+.btn-scroll-up{
+  position: fixed;
+  top: 85vh;
+  right: 5vw;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  font-weight: bold;
+  opacity: 0.2;
+  background-color: var(--nav-bg-color);
+}
+
+.btn-scroll-up:hover{
+  background-color: white;
+  color: var(--nav-bg-color);
+  border-color: var(--nav-bg-color);
+  opacity: 1;
+}
+
+
 /*Indicateur de la page courante*/
 .content-path-navigation{
   font-style: italic;
@@ -42,6 +64,29 @@
   text-align: center;
   font-style: italic;
   color: orange;
+  display: none;
+}
+
+
+.printing-zone{
+  width: 100%;
+  height: 40px;
+  font-weight: bold;
+  text-align: center;
+  font-style: italic;
+  color: green;
+  display: none;
+}
+
+
+.deleting-zone{
+  width: 100%;
+  height: 40px;
+  font-weight: bold;
+  text-align: center;
+  font-style: italic;
+  color: red;
+  display: none;
 }
 
 
@@ -49,6 +94,13 @@
 .content-result-line{
   width: 100%;
   height: auto;
+}
+
+.content-number-line-found{
+  width: 100%;
+  height: 35px;
+  font-style: italic;
+  text-align: right;
 }
 
 /*Ligne des resultats vides*/
@@ -64,26 +116,67 @@
   font-style: italic;
 }
 
-/*Boutton d'ajout d'un nouvel élément*/
-.btn-add{
-  margin-right: 50px;
+
+/*Boutons d'action (ajout / suppression / edition)*/
+.btn-top-action{
   float: right;
-  background-color: var(--nav-bg-color);
   color: white;
   width: 50px;
   height: 50px;
   font-weight: bold;
   border-radius: 5px;
+  position: fixed;
+  right: 3vw;
+  z-index: 5;
+}
+
+/*Boutton d'ajout d'un nouvel élément*/
+.btn-add{
+  background-color: var(--nav-bg-color);
 }
 
 .btn-add:hover{
-  box-shadow: 2px 2px 5px;
-  color: black;
+  background-color: white;
+  color: var(--nav-bg-color);
+  border-color: var(--nav-bg-color);
+  opacity: 0.7;
 }
 
 
+/*Bouton de suppression d'un élément sélectionné*/
+.btn-delete{
+  top: 31vh;
+  display: none;
+  background-color: red;
+}
+
+
+.btn-delete:hover{
+  background-color: white;
+  color: red;
+  border-color: red;
+  opacity: 0.7;
+}
+
+
+/*Bouton d'impression en PDF*/
+.btn-print-pdf{
+  top: 22vh;
+  font-weight: bold;
+  display: none;
+  background-color: #6D071A;
+}
+
+
+.btn-print-pdf:hover{
+  background-color: white;
+  color: #6D071A;
+  border-color: #6D071A;
+  opacity: 0.7;
+}
+
 /*Boutton de sauvegarde*/
-.btn-save{
+.btn-submit{
   background-color: var(--nav-bg-color);
   color: white;
   height: 50px;
@@ -91,7 +184,7 @@
   border-radius: 5px;
 }
 
-.btn-save:hover{
+.btn-submit:hover{
   box-shadow: 2px 2px 5px;
   opacity: 0.8;
 }
@@ -202,10 +295,6 @@
   display: none;
 }
 
-.mobile-item-menu .txt-menu{
-  display: initial;
-}
-
 .icon-menu{
   font-size: 25px;
 }
@@ -217,6 +306,8 @@
 .mobile-content-menu{
   width: 100%;
   margin-top: 80px;
+  position: fixed;
+  z-index: 5;
   display: none;
   background-color : var(--nav-bg-color);
 }
@@ -280,7 +371,36 @@
 }
 
 
+/*Contenant des filtres*/
+.content-filters{
+  width: 50%;
+  width: 100%;
+  height: auto;
+}
 
+.content-filters label{
+  font-style: italic;
+  color: gray;
+}
+
+.content-filters select{
+  height: 50px;
+  border: none;
+  text-align: center;
+  color: var(--nav-bg-color);
+  font-weight: bold;
+  border-bottom: solid 2px var(--nav-bg-color);
+}
+
+
+
+/*Blocs/cadres/carrés alignés et responsifs*/
+.box-item{
+  height: auto;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-top: 20px;
+}
 
 
 

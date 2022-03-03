@@ -18,7 +18,7 @@ $(function(){
 
 	function form_constraint_management(){
 
-		$('.hiv-status, .date-birth, .beneficiary-type, .school-level').trigger('change');
+		$('select, input').trigger('change');
 
 		$('.champ-care').click(function(){
 			if($(this).is(':checked')){
@@ -48,7 +48,7 @@ $(function(){
 				$('.column-reason').fadeOut(function(){
 					$('.column-art-status, .column-art-code').fadeIn();
 				});
-			
+
 			}else{
 				$('.column-art-status, .column-art-code, .column-reason').fadeOut();
 
@@ -75,7 +75,7 @@ $(function(){
 				$('.column-birth-certificate, .column-relationship-caregiver-child').fadeOut();
 				$('.column-national-id').fadeIn();
 				$('.column-case-infos').fadeOut();
-			
+
 			}else{
 				$('.column-case-infos').fadeIn();
 				$('.column-birth-certificate, .column-relationship-caregiver-child').fadeIn();
@@ -127,14 +127,16 @@ $(function(){
 
 	/*Vérifie que tous les elements VISIBLES ET OBLIGATOIRES ont une valeur*/
 	function check_no_empty_field(){
-		$('.btn-save').click(function(){
+		$('.btn-submit').click(function(){
 
 			let completed="true";
 
 			/*Parcours chaque champs*/
 			$('.column-form').each(function(){
+				
 				/*Verifie si le champs est visible*/
 				if($(this).is(':visible')){
+					
 					/*Verifie si le champs est vide*/
 					if($(this).find('.required-field').parents('.column-form').find('.input-form').val()==""){
 						completed="false";
@@ -155,6 +157,13 @@ $(function(){
 
 	function submit_enrolment(){
 		$('.form-enrolment').submit(function(){
+
+			/*Type d'opération*/
+			let operation="saving";
+
+			if($('.btn-update').is(':visible')){
+				operation="updating";
+			}
 
 			let response="";
 			
@@ -238,75 +247,165 @@ $(function(){
 			}
 
 
-			$.ajax({
-		            type: "POST",
-		            url: "treatment/add-enrolment.php",
-		            data: {
-		                "first_name":first_name,
-				        "family_name":family_name,
-				        "national_id":national_id,
-				        "mobile":mobile,
-				        "sex":sex,
-				        "date_of_birth":date_of_birth,
-				        "hiv_status":hiv_status,
-				        "reason_unknown_hiv_status":reason_unknown_hiv_status,
-				        "art_status":art_status,
-				        "art_code":art_code,
-				        "date_initiation_art":date_initiation_art_code,
-				        "treatment_health_facility_linked":treatment_health_facility_linked,
-				        "art_regimen":art_regimen,
-				        "school_level":school_level,
-				        "class_level":class_level,
-				        "relationship_caregiver_child":relationship_caregiver_child,
-				        "cause_of_dead_mother":cause_of_dead_mother,
-				        "cause_of_dead_father":cause_of_dead_father,
-				        "population_type":population_type,
-				        "index_case":index_case,
-				        "disability":disability,
-				        "has_birth_certificate":has_birth_certificate,
-				        "pregnant_woman":pregnant_woman,
-				        "health_district_residence":health_district_residence,
-				        "health_area":health_area,
-				        "quarter":quarter,
-				        "village":village,
-				        "locality_description":locality_description,
-				        "point_of_entry":point_of_entry,
-				        "champ_code":champ_code,
-				        "type_enrolment":type_enrolment,
-				        "date_enrolment":date_enrolment,
-				        "case_worker":case_worker,
-				        "beneficiary_type":beneficiary_type
-		            },
+			if(operation=="saving"){
 
-		            //if received a response from the server
-		            success: function(data, textStatus, jqXHR) {
-		            	window.location.href="../enrolment";
-		            },
+				/*Ajout d'un enrollement*/
+				$.ajax({
+					type: "POST",
+					url: "treatment/add-enrolment.php",
+					data: {
+						"first_name":first_name,
+						"family_name":family_name,
+						"national_id":national_id,
+						"mobile":mobile,
+						"sex":sex,
+						"date_of_birth":date_of_birth,
+						"hiv_status":hiv_status,
+						"reason_unknown_hiv_status":reason_unknown_hiv_status,
+						"art_status":art_status,
+						"art_code":art_code,
+						"date_initiation_art":date_initiation_art_code,
+						"treatment_health_facility_linked":treatment_health_facility_linked,
+						"art_regimen":art_regimen,
+						"school_level":school_level,
+						"class_level":class_level,
+						"relationship_caregiver_child":relationship_caregiver_child,
+						"cause_of_dead_mother":cause_of_dead_mother,
+						"cause_of_dead_father":cause_of_dead_father,
+						"population_type":population_type,
+						"index_case":index_case,
+						"disability":disability,
+						"has_birth_certificate":has_birth_certificate,
+						"pregnant_woman":pregnant_woman,
+						"health_district_residence":health_district_residence,
+						"health_area":health_area,
+						"quarter":quarter,
+						"village":village,
+						"locality_description":locality_description,
+						"point_of_entry":point_of_entry,
+						"champ_code":champ_code,
+						"type_enrolment":type_enrolment,
+						"date_enrolment":date_enrolment,
+						"case_worker":case_worker,
+						"beneficiary_type":beneficiary_type
+					},
 
-		            //If there was no resonse from the server
-		            error: function(jqXHR, textStatus, errorThrown){
-		            	alert(textStatus);
-		            },
+			            //if received a response from the server
+			            success: function(data, textStatus, jqXHR) {
+			            	if(data==true){
+			            		window.location.href="../enrolment";
 
-		            //capture the request before it was sent to server
-		            beforeSend: function(jqXHR, settings){
-		            	/*Vider / Reinitialiser le formulaire*/
-		            	$('.form-enrolment').trigger('reset');
-		            	$('.form-enrolment')[0].reset();
+			            	}else{
+			            		alert("ART code or national id already exists ! Please change the value...");
+			            	}
+			            },
 
-		            	$('.content-form').html("");
-						response="<span class='orange'>Saving...</span>";
-		            	$('.content-form').css('text-align','center').html(response).slideDown(1);
-		            },
+			            //If there was no resonse from the server
+			            error: function(jqXHR, textStatus, errorThrown){
+			            	alert(textStatus);
+			            },
 
-		            //this is called after the response or error functions are finished
-		            //so that we can take some action
-		            complete: function(jqXHR, textStatus){
+			            //capture the request before it was sent to server
+			            beforeSend: function(jqXHR, settings){
+			            	/*Vider / Reinitialiser le formulaire*/
+			            	$('.form-enrolment').trigger('reset');
+			            	$('.form-enrolment')[0].reset();
 
-		            }
+			            	$('.content-form').html("");
+			            	response="<span class='orange'>Saving...</span>";
+			            	$('.content-form').css('text-align','center').html(response).slideDown(1);
+			            },
 
-		        });
+			            //this is called after the response or error functions are finished
+			            //so that we can take some action
+			            complete: function(jqXHR, textStatus){
 
+			            }
+
+			    });
+
+
+			}else if(operation=="updating"){
+
+				/*Modification d'un enrollement*/
+
+				let id=parseInt($('.form-enrolment').data('id'));
+
+				$.ajax({
+					type: "POST",
+					url: "treatment/edit-enrolment.php",
+					data: {
+						"id":id,
+						"first_name":first_name,
+						"family_name":family_name,
+						"national_id":national_id,
+						"mobile":mobile,
+						"sex":sex,
+						"date_of_birth":date_of_birth,
+						"hiv_status":hiv_status,
+						"reason_unknown_hiv_status":reason_unknown_hiv_status,
+						"art_status":art_status,
+						"art_code":art_code,
+						"date_initiation_art":date_initiation_art_code,
+						"treatment_health_facility_linked":treatment_health_facility_linked,
+						"art_regimen":art_regimen,
+						"school_level":school_level,
+						"class_level":class_level,
+						"relationship_caregiver_child":relationship_caregiver_child,
+						"cause_of_dead_mother":cause_of_dead_mother,
+						"cause_of_dead_father":cause_of_dead_father,
+						"population_type":population_type,
+						"index_case":index_case,
+						"disability":disability,
+						"has_birth_certificate":has_birth_certificate,
+						"pregnant_woman":pregnant_woman,
+						"health_district_residence":health_district_residence,
+						"health_area":health_area,
+						"quarter":quarter,
+						"village":village,
+						"locality_description":locality_description,
+						"point_of_entry":point_of_entry,
+						"champ_code":champ_code,
+						"type_enrolment":type_enrolment,
+						"date_enrolment":date_enrolment,
+						"case_worker":case_worker,
+						"beneficiary_type":beneficiary_type
+					},
+
+			            //if received a response from the server
+			            success: function(data, textStatus, jqXHR) {
+			            	if(data==true){
+			            		window.location.href="../enrolment";
+
+			            	}else{
+			            		alert("ART code or national id already exists ! Please change the value...");
+			            	}
+			            },
+
+			            //If there was no resonse from the server
+			            error: function(jqXHR, textStatus, errorThrown){
+			            	alert(textStatus);
+			            },
+
+			            //capture the request before it was sent to server
+			            beforeSend: function(jqXHR, settings){
+			            	/*Vider / Reinitialiser le formulaire*/
+			            	$('.form-enrolment').trigger('reset');
+			            	$('.form-enrolment')[0].reset();
+
+			            	$('.content-form').html("");
+			            	response="<span class='orange'>Updating...</span>";
+			            	$('.content-form').css('text-align','center').html(response).slideDown(1);
+			            },
+
+			            //this is called after the response or error functions are finished
+			            //so that we can take some action
+			            complete: function(jqXHR, textStatus){
+
+			            }
+
+				});
+			}
 
 			return false;
 

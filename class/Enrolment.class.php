@@ -40,6 +40,8 @@ class Enrolment
     private $_date_enrolment;
     private $_case_worker;
     private $_beneficiary_type;
+    private $_deleted;
+    private $_printed;
     private $_added_by;
     private $_added_at;
 
@@ -150,7 +152,7 @@ class Enrolment
 
 
     public function setArt_code($art_code){
-        $this->_art_code=strval($art_code);
+        $this->_art_code=strtoupper(strval($art_code));
     }
 
     public function getArt_code(){
@@ -330,7 +332,7 @@ class Enrolment
 
 
     public function setChamp_code($champ_code){
-        $this->_champ_code=strval($champ_code);
+        $this->_champ_code=strtoupper(strval($champ_code));
     }
 
     public function getChamp_code(){
@@ -374,6 +376,24 @@ class Enrolment
     }
 
 
+    public function setDeleted($deleted){
+        $this->_deleted=$deleted;
+    }
+
+    public function getDeleted(){
+        return $this->_deleted;
+    }
+
+
+    public function setPrinted($printed){
+        $this->_printed=$printed;
+    }
+
+    public function getPrinted(){
+        return $this->_printed;
+    }
+
+
     public function setAdded_by($added_by){
         $this->_added_by=strval($added_by);
     }
@@ -407,7 +427,7 @@ class Enrolment
 
     public function addEnrolment(Enrolment $enrolment){
         include(_APP_PATH."bd/server-connect.php");
-        $query=$db->prepare("INSERT INTO enrolments VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $query=$db->prepare("INSERT INTO enrolments VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
         $id=0;
         $first_name=$enrolment->getFirst_name();
@@ -444,6 +464,8 @@ class Enrolment
         $date_enrolment=$enrolment->getDate_enrolment();
         $case_worker=$enrolment->getCase_worker();
         $beneficiary_type=$enrolment->getBeneficiary_type();
+        $deleted=$enrolment->getDeleted();
+        $printed=$enrolment->getPrinted();
         $added_by=$enrolment->getAdded_by();
         $added_at=$enrolment->getAdded_at();
 
@@ -482,8 +504,10 @@ class Enrolment
         $query->bindParam(33,$date_enrolment);
         $query->bindParam(34,$case_worker);
         $query->bindParam(35,$beneficiary_type);
-        $query->bindParam(36,$added_by);
-        $query->bindParam(37,$added_at);
+        $query->bindParam(36,$deleted);
+        $query->bindParam(37,$printed);
+        $query->bindParam(38,$added_by);
+        $query->bindParam(39,$added_at);
 
 
         if($query->execute()){
@@ -507,6 +531,53 @@ class Enrolment
     $req=$db->prepare("DELETE FROM enrolments WHERE id=?");
 
     $req->bindParam(1,$id_enrolment);
+
+    if($req->execute()){
+        return true;
+    }else{
+        return false;
+    }
+
+}
+
+
+
+
+
+
+
+public function archiveEnrolment($id_enrolment){
+    include(_APP_PATH."bd/server-connect.php");
+
+    $id_enrolment=intval($id_enrolment);
+    $deleted=1;
+
+    $req=$db->prepare("UPDATE enrolments SET deleted=? WHERE id=?");
+
+    $req->bindParam(1,$deleted);
+    $req->bindParam(2,$id_enrolment);
+
+    if($req->execute()){
+        return true;
+    }else{
+        return false;
+    }
+
+}
+
+
+
+
+public function printEnrolment($id_enrolment){
+    include(_APP_PATH."bd/server-connect.php");
+
+    $id_enrolment=intval($id_enrolment);
+    $printed=1;
+
+    $req=$db->prepare("UPDATE enrolments SET printed=? WHERE id=?");
+
+    $req->bindParam(1,$printed);
+    $req->bindParam(2,$id_enrolment);
 
     if($req->execute()){
         return true;
@@ -543,7 +614,7 @@ public function getEnrolment($id){
         $data=$query->fetch();
         return (new Enrolment($data));
     }else{
-        return false;
+        return "false";
     }
 
 }
@@ -553,7 +624,7 @@ public function getEnrolment($id){
 
 public function getEnrolments() {
     include(_APP_PATH."bd/server-connect.php");
-    $query=$db->prepare("SELECT * FROM enrolments ORDER BY added_at ASC");
+    $query=$db->prepare("SELECT * FROM enrolments WHERE deleted=0 ORDER BY date_enrolment ASC");
 
     $enrolments=[];
 
@@ -571,40 +642,94 @@ public function getEnrolments() {
 
 
 
-public function findEnrolments($word) {
+public function findEnrolments($word,$filter) {
     include(_APP_PATH."bd/server-connect.php");
     $query=$db->prepare("SELECT * FROM enrolments
-                        WHERE first_name LIKE '%$word%'
-                        OR family_name LIKE '%$word%'
-                        OR national_id LIKE '%$word%'
-                        OR mobile LIKE '%$word%'
-                        OR sex LIKE '%$word%'
-                        OR date_of_birth LIKE '%$word%'
-                        OR hiv_status LIKE '%$word%'
-                        OR reason_unknown_hiv_status LIKE '%$word%'
-                        OR art_status LIKE '%$word%'
-                        OR art_code LIKE '%$word%'
-                        OR date_initiation_art LIKE '%$word%'
-                        OR treatment_health_facility_linked LIKE '%$word%'
-                        OR art_regimen LIKE '%$word%'
-                        OR school_level LIKE '%$word%'
-                        OR relationship_caregiver_child LIKE '%$word%'
-                        OR cause_of_dead_mother LIKE '%$word%'
-                        OR cause_of_dead_father LIKE '%$word%'
-                        OR population_type LIKE '%$word%'
-                        OR health_district_residence LIKE '%$word%'
-                        OR health_area LIKE '%$word%'
-                        OR quarter LIKE '%$word%'
-                        OR village LIKE '%$word%'
-                        OR locality_description LIKE '%$word%'
-                        OR point_of_entry LIKE '%$word%'
-                        OR champ_code LIKE '%$word%'
-                        OR type_enrolment LIKE '%$word%'
-                        OR date_enrolment LIKE '%$word%'
-                        OR case_worker LIKE '%$word%'
-                        OR beneficiary_type LIKE '%$word%'
+        WHERE (first_name LIKE '%$word%'
+            OR family_name LIKE '%$word%'
+            OR national_id LIKE '%$word%'
+            OR mobile LIKE '%$word%'
+            OR sex LIKE '%$word%'
+            OR date_of_birth LIKE '%$word%'
+            OR hiv_status LIKE '%$word%'
+            OR reason_unknown_hiv_status LIKE '%$word%'
+            OR art_status LIKE '%$word%'
+            OR art_code LIKE '%$word%'
+            OR date_initiation_art LIKE '%$word%'
+            OR treatment_health_facility_linked LIKE '%$word%'
+            OR art_regimen LIKE '%$word%'
+            OR school_level LIKE '%$word%'
+            OR relationship_caregiver_child LIKE '%$word%'
+            OR cause_of_dead_mother LIKE '%$word%'
+            OR cause_of_dead_father LIKE '%$word%'
+            OR population_type LIKE '%$word%'
+            OR health_district_residence LIKE '%$word%'
+            OR health_area LIKE '%$word%'
+            OR quarter LIKE '%$word%'
+            OR village LIKE '%$word%'
+            OR locality_description LIKE '%$word%'
+            OR point_of_entry LIKE '%$word%'
+            OR champ_code LIKE '%$word%'
+            OR type_enrolment LIKE '%$word%'
+            OR date_enrolment LIKE '%$word%'
+            OR case_worker LIKE '%$word%'
+            OR beneficiary_type LIKE '%$word%')
+        AND deleted=0
+        ORDER BY $filter ASC");
 
-                        ORDER BY added_at ASC");
+
+    $enrolments=[];
+
+    if($query->execute()){
+        while($data=$query->fetch()){
+            $enrolments[]=new Enrolment($data);
+        }
+        return $enrolments;
+    }else{
+        return false;
+    }
+}
+
+
+
+
+
+public function findPrintedEnrolments($word,$filter) {
+    include(_APP_PATH."bd/server-connect.php");
+    $query=$db->prepare("SELECT * FROM enrolments
+        WHERE (first_name LIKE '%$word%'
+            OR family_name LIKE '%$word%'
+            OR national_id LIKE '%$word%'
+            OR mobile LIKE '%$word%'
+            OR sex LIKE '%$word%'
+            OR date_of_birth LIKE '%$word%'
+            OR hiv_status LIKE '%$word%'
+            OR reason_unknown_hiv_status LIKE '%$word%'
+            OR art_status LIKE '%$word%'
+            OR art_code LIKE '%$word%'
+            OR date_initiation_art LIKE '%$word%'
+            OR treatment_health_facility_linked LIKE '%$word%'
+            OR art_regimen LIKE '%$word%'
+            OR school_level LIKE '%$word%'
+            OR relationship_caregiver_child LIKE '%$word%'
+            OR cause_of_dead_mother LIKE '%$word%'
+            OR cause_of_dead_father LIKE '%$word%'
+            OR population_type LIKE '%$word%'
+            OR health_district_residence LIKE '%$word%'
+            OR health_area LIKE '%$word%'
+            OR quarter LIKE '%$word%'
+            OR village LIKE '%$word%'
+            OR locality_description LIKE '%$word%'
+            OR point_of_entry LIKE '%$word%'
+            OR champ_code LIKE '%$word%'
+            OR type_enrolment LIKE '%$word%'
+            OR date_enrolment LIKE '%$word%'
+            OR case_worker LIKE '%$word%'
+            OR beneficiary_type LIKE '%$word%')
+        AND deleted=0
+        AND printed=1
+        ORDER BY $filter ASC");
+
 
     $enrolments=[];
 
@@ -660,82 +785,85 @@ public function editEnrolment(Enrolment $enrolment) {
         type_enrolment=?,
         date_enrolment=?,
         case_worker=?,
-        beneficiary_type=?
+        beneficiary_type=?,
+        printed=?
         WHERE id=?
 
         ");
 
-        $id=$enrolment->getId();
-        $first_name=$enrolment->getFirst_name();
-        $family_name=$enrolment->getFamily_name();
-        $national_id=$enrolment->getNational_id();
-        $mobile=$enrolment->getMobile();
-        $sex=$enrolment->getSex();
-        $date_of_birth=$enrolment->getDate_of_birth();
-        $hiv_status=$enrolment->getHiv_status();
-        $reason_unknown_hiv_status=$enrolment->getReason_unknown_hiv_status();
-        $art_status=$enrolment->getArt_status();
-        $art_code=$enrolment->getArt_code();
-        $date_initiation_art=$enrolment->getDate_initiation_art();
-        $treatment_health_facility_linked=$enrolment->getTreatment_health_facility_linked();
-        $art_regimen=$enrolment->getArt_regimen();
-        $school_level=$enrolment->getSchool_level();
-        $class=$enrolment->getClass();
-        $relationship_caregiver_child=$enrolment->getRelationship_caregiver_child();
-        $cause_of_dead_mother=$enrolment->getCause_of_dead_mother();
-        $cause_of_dead_father=$enrolment->getCause_of_dead_father();
-        $population_type=$enrolment->getPopulation_type();
-        $index_case=$enrolment->getIndex_case();
-        $disability=$enrolment->getDisability();
-        $has_birth_certificate=$enrolment->getHas_birth_certificate();
-        $pregnant_woman=$enrolment->getPregnant_woman();
-        $health_district_residence=$enrolment->getHealth_district_residence();
-        $health_area=$enrolment->getHealth_area();
-        $quarter=$enrolment->getQuarter();
-        $village=$enrolment->getVillage();
-        $locality_description=$enrolment->getLocality_description();
-        $point_of_entry=$enrolment->getPoint_of_entry();
-        $champ_code=$enrolment->getChamp_code();
-        $type_enrolment=$enrolment->getType_enrolment();
-        $date_enrolment=$enrolment->getDate_enrolment();
-        $case_worker=$enrolment->getCase_worker();
-        $beneficiary_type=$enrolment->getBeneficiary_type();
+    $id=$enrolment->getId();
+    $first_name=$enrolment->getFirst_name();
+    $family_name=$enrolment->getFamily_name();
+    $national_id=$enrolment->getNational_id();
+    $mobile=$enrolment->getMobile();
+    $sex=$enrolment->getSex();
+    $date_of_birth=$enrolment->getDate_of_birth();
+    $hiv_status=$enrolment->getHiv_status();
+    $reason_unknown_hiv_status=$enrolment->getReason_unknown_hiv_status();
+    $art_status=$enrolment->getArt_status();
+    $art_code=$enrolment->getArt_code();
+    $date_initiation_art=$enrolment->getDate_initiation_art();
+    $treatment_health_facility_linked=$enrolment->getTreatment_health_facility_linked();
+    $art_regimen=$enrolment->getArt_regimen();
+    $school_level=$enrolment->getSchool_level();
+    $class=$enrolment->getClass();
+    $relationship_caregiver_child=$enrolment->getRelationship_caregiver_child();
+    $cause_of_dead_mother=$enrolment->getCause_of_dead_mother();
+    $cause_of_dead_father=$enrolment->getCause_of_dead_father();
+    $population_type=$enrolment->getPopulation_type();
+    $index_case=$enrolment->getIndex_case();
+    $disability=$enrolment->getDisability();
+    $has_birth_certificate=$enrolment->getHas_birth_certificate();
+    $pregnant_woman=$enrolment->getPregnant_woman();
+    $health_district_residence=$enrolment->getHealth_district_residence();
+    $health_area=$enrolment->getHealth_area();
+    $quarter=$enrolment->getQuarter();
+    $village=$enrolment->getVillage();
+    $locality_description=$enrolment->getLocality_description();
+    $point_of_entry=$enrolment->getPoint_of_entry();
+    $champ_code=$enrolment->getChamp_code();
+    $type_enrolment=$enrolment->getType_enrolment();
+    $date_enrolment=$enrolment->getDate_enrolment();
+    $case_worker=$enrolment->getCase_worker();
+    $beneficiary_type=$enrolment->getBeneficiary_type();
+    $printed=$enrolment->getPrinted();
 
-        $query->bindParam(1,$first_name);
-        $query->bindParam(2,$family_name);
-        $query->bindParam(3,$national_id);
-        $query->bindParam(4,$mobile);
-        $query->bindParam(5,$sex);
-        $query->bindParam(6,$date_of_birth);
-        $query->bindParam(7,$hiv_status);
-        $query->bindParam(8,$reason_unknown_hiv_status);
-        $query->bindParam(9,$art_status);
-        $query->bindParam(10,$art_code);
-        $query->bindParam(11,$date_initiation_art);
-        $query->bindParam(12,$treatment_health_facility_linked);
-        $query->bindParam(13,$art_regimen);
-        $query->bindParam(14,$school_level);
-        $query->bindParam(15,$class);
-        $query->bindParam(16,$relationship_caregiver_child);
-        $query->bindParam(17,$cause_of_dead_mother);
-        $query->bindParam(18,$cause_of_dead_father);
-        $query->bindParam(19,$population_type);
-        $query->bindParam(20,$index_case);
-        $query->bindParam(21,$disability);
-        $query->bindParam(22,$has_birth_certificate);
-        $query->bindParam(23,$pregnant_woman);
-        $query->bindParam(24,$health_district_residence);
-        $query->bindParam(25,$health_area);
-        $query->bindParam(26,$quarter);
-        $query->bindParam(27,$village);
-        $query->bindParam(28,$locality_description);
-        $query->bindParam(29,$point_of_entry);
-        $query->bindParam(30,$champ_code);
-        $query->bindParam(31,$type_enrolment);
-        $query->bindParam(32,$date_enrolment);
-        $query->bindParam(33,$case_worker);
-        $query->bindParam(34,$beneficiary_type);
-        $query->bindParam(35,$id);
+    $query->bindParam(1,$first_name);
+    $query->bindParam(2,$family_name);
+    $query->bindParam(3,$national_id);
+    $query->bindParam(4,$mobile);
+    $query->bindParam(5,$sex);
+    $query->bindParam(6,$date_of_birth);
+    $query->bindParam(7,$hiv_status);
+    $query->bindParam(8,$reason_unknown_hiv_status);
+    $query->bindParam(9,$art_status);
+    $query->bindParam(10,$art_code);
+    $query->bindParam(11,$date_initiation_art);
+    $query->bindParam(12,$treatment_health_facility_linked);
+    $query->bindParam(13,$art_regimen);
+    $query->bindParam(14,$school_level);
+    $query->bindParam(15,$class);
+    $query->bindParam(16,$relationship_caregiver_child);
+    $query->bindParam(17,$cause_of_dead_mother);
+    $query->bindParam(18,$cause_of_dead_father);
+    $query->bindParam(19,$population_type);
+    $query->bindParam(20,$index_case);
+    $query->bindParam(21,$disability);
+    $query->bindParam(22,$has_birth_certificate);
+    $query->bindParam(23,$pregnant_woman);
+    $query->bindParam(24,$health_district_residence);
+    $query->bindParam(25,$health_area);
+    $query->bindParam(26,$quarter);
+    $query->bindParam(27,$village);
+    $query->bindParam(28,$locality_description);
+    $query->bindParam(29,$point_of_entry);
+    $query->bindParam(30,$champ_code);
+    $query->bindParam(31,$type_enrolment);
+    $query->bindParam(32,$date_enrolment);
+    $query->bindParam(33,$case_worker);
+    $query->bindParam(34,$beneficiary_type);
+    $query->bindParam(35,$printed);
+    $query->bindParam(36,$id);
 
     if($query->execute()){
 

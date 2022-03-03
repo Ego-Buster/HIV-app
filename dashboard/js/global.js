@@ -6,7 +6,7 @@ $(function(){
 
 
 	function auto_load_mobile(){
-		set_burger_action();
+		show_mobile_content_menu();
 	}
 
 
@@ -20,7 +20,7 @@ $(function(){
 	}
 
 	/* FONCTIONS POUR APPAREILS MOBILES */
-	function set_burger_action(){
+	function show_mobile_content_menu(){
 		$('.btn-burger').click(function(){
 			$('.mobile-content-menu').slideToggle(function(){
 				$('.mobile-item-menu .txt-menu').slideDown();
@@ -28,6 +28,7 @@ $(function(){
 					$('.btn-burger').html('<i class="DGfi-cross" style="font-size:27px;"></i>');
 				}else{
 					$('.btn-burger').html('<i class="DGfi-menu"></i>');
+					$('.txt-menu').slideUp();
 				}
 			});
 		});
@@ -60,6 +61,25 @@ $(function(){
 			
 		});	
 	}
+
+	$('.btn-scroll-up').click(function(){
+		scrollTop();
+	});
+
+	function scrollTo(element){
+		$([document.documentElement, document.body]).animate({
+		    scrollTop: element.offset().top
+		}, 500);
+	}
+
+
+	function scrollTop(){
+
+		$([document.documentElement, document.body]).animate({scrollTop:0}, '1000', 'swing', function() {
+			
+		});
+	}
+
 
 /*
 

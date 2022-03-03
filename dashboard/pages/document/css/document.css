@@ -1,0 +1,48 @@
+.content-box{
+	width: 80%;
+	margin-left: 10%;
+	height: auto;
+	padding-top: 20px;
+}
+
+.content-box a{
+	color: var(--nav-bg-color);
+}
+
+.contener-doument{
+	width: 80%;
+	margin-left: 10%;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	background: rgb(220,220,220);
+	border-radius: 5px;
+	font-weight: bolder;
+}
+
+.contener-doument:hover{
+	background: var(--nav-bg-color);
+	color: white;
+	cursor: pointer;
+}
+
+.box-selected .contener-doument{
+	background: var(--nav-bg-color);
+	color: white;
+	cursor: pointer;
+	box-shadow: 5px 5px 5px black;
+	opacity: 0.7;
+}
+
+.box-document-icon{
+	width: 100%;
+	font-size: 50px;
+	text-align: center;
+	font-weight: bolder;
+	padding-bottom: 5px;
+}
+
+.box-document-name{
+	width: 100%;
+	text-align: center;
+}
+

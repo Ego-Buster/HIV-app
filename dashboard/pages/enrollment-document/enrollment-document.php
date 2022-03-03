@@ -1,12 +1,14 @@
+<div class="content-pdf-view">
+	<div class="pdf-view"></div>
+	<button>Quitter</button>
+</div>
 <div class="content-tab">
 
 	<div class="content-head">
-		<div class="content-path-navigation">You're in : <a href="../enrolment" class="link-navigation">Enrollment ></a></div>
-		<a href="../form-enrolment">
-			<button class="btn-add btn-top-action shine_black" title="Add enrolment" type="button"><i class="DGfi-plus"></i></button>
-		</a>
-		<button class="btn-print-pdf btn-top-action shine_black" title="Print In PDF format" type="button"><i class="DGfi-file-pdf"></i></button>
-		<button class="btn-delete btn-top-action shine_black" title="Delete enrolment" type="button"><i class="DGfi-cross"></i></button>
+		<div class="content-path-navigation">You're in : <a href="../document" class="link-navigation">Documents ></a> <a href="../enrollment-document" class="link-navigation">Enrollments ></a></div>
+
+		<button class="btn-open-pdf btn-top-action shine_black" title="Open document" type="button"><i class="DGfi-eye"></i></button>
+		<button class="btn-delete btn-top-action shine_black" title="Delete document" type="button"><i class="DGfi-cross"></i></button>
 	</div>
 
 	<div class="searching-line">
@@ -14,9 +16,6 @@
 	</div>
 
 	<div class="waiting-zone">
-		
-	</div>
-	<div class="printing-zone">
 		
 	</div>
 	<div class="deleting-zone">

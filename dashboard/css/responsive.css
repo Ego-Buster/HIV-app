@@ -1,6 +1,14 @@
 /* Mobile */
 @media (max-width: 575px) {
-  
+    .content-path-navigation{
+      font-size: 14px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .line-title{
+      font-size: 20px;
+    }
 
 }
 

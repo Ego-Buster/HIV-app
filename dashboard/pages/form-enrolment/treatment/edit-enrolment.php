@@ -9,7 +9,7 @@ require_once _APP_PATH.'tools/init_functions/import-class.php';
 
 
 $current_enrolment=[
-	'id'=>0,
+	'id'=>$_POST['id'],
     'first_name'=>$_POST['first_name'],
     'family_name'=>$_POST['family_name'],
     'national_id'=>$_POST['national_id'],
@@ -53,7 +53,7 @@ $current_enrolment=[
 
 $enrolment=new Enrolment($current_enrolment);
 
-echo $enrolment->addEnrolment($enrolment);
+echo $enrolment->editEnrolment($enrolment);
 
 
 

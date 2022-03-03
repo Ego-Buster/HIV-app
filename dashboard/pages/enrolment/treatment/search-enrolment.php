@@ -8,17 +8,18 @@ require_once _APP_PATH.'tools/init_functions/import-class.php';
 
 
 $enrolment=new Enrolment($current_enrolment);
-$enrolments=$enrolment->findEnrolments($_POST['word']);
+$enrolments=$enrolment->findEnrolments($_POST['word'],$_POST['filter']);
 
 if(!count($enrolments)>0){
     ?>
     
     <div class="line-not-found">No enrollment found! !</div>
-
+    
     <?php
 }else{
     ?>
 
+    <div class="content-number-line-found"><?php echo count($enrolments); ?> enrollments</div>
 
     <table border="0" cellspacing="0" class="responsive-table content-enrolment content-line-infos">
         <thead>

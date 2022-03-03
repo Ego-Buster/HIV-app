@@ -2,11 +2,20 @@
 	box-shadow: initial;
 }
 
-	
+
 
 .responsive-table .row-item:hover,.responsive-table tbody .row-item:nth-child(even):hover{
 	opacity: 0.5;
 	background-color: transparent;
-	box-shadow: 1px 1px 2px blue;
-	border-bottom: solid 1px rgb(240,240,240);
+	border-left: solid 3px var(--nav-bg-color);
 }
+
+.selected-enrollment{
+	color: blue;
+	font-weight: bold;
+	box-shadow: 2px 2px 2px blue;
+}
+
+.selected-enrollment:hover{
+	color: red;
+} 

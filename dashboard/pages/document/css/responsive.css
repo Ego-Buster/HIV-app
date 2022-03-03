@@ -1,40 +1,28 @@
 /* Mobile */
 @media (max-width: 575px) {
-	.mobile-content-menu{
-		height: 100vh;
-	}
+	
 
 }
 
 
 /* Tablette only */
 @media (min-width: 576px) and (max-width: 991px) {
-  
+
 
 }
 
 
 /* Tablette */
 @media (max-width: 991px) {
-	.content-enrolment{
-		margin-top: 30px;
-	}
 
-	.searching-line{
-		width: 100%;
-	}
-
-	.searching-line input{
-		width: 80%;
-	}
 
 }
 
 
 /* Laptop */
 @media (min-width: 992px) {
-  
-  
+
+
 }
 
 
